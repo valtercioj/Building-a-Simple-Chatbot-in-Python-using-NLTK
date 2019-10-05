@@ -11,6 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import warnings
 warnings.filterwarnings('ignore')
+import pyttsx3
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -24,7 +25,7 @@ nltk.download('popular', quiet=True) # for downloading packages
 #Reading in the corpus
 with open('chatbot.txt','r', encoding='utf8', errors ='ignore') as fin:
     raw = fin.read().lower()
-
+    
 #TOkenisation
 sent_tokens = nltk.sent_tokenize(raw)# converts to list of sentences 
 word_tokens = nltk.word_tokenize(raw)# converts to list of words
@@ -48,7 +49,12 @@ def greeting(sentence):
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
-
+def read():
+    arq = open('chatbot.txt','r')
+    text = arq.read()
+    s = pyttsx3.init()
+    s.say(text)
+    s.runAndWait()
 # Generating response
 def response(user_response):
     robo_response=''
