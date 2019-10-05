@@ -11,6 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import warnings
 warnings.filterwarnings('ignore')
+import wikipedia
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -41,7 +42,12 @@ def LemNormalize(text):
 # Keyword Matching
 GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey",)
 GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad! You are talking to me"]
-
+def wiki():
+    search = str(input('digit your search: '))
+    wikipedia.set_lang('pt')
+    resu = wikipedia.summary(search)
+    print(resu)
+    
 def greeting(sentence):
     """If user's input is a greeting, return a greeting response"""
     for word in sentence.split():
